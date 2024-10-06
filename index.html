@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Yamaha AVR PEQ Updater</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        /* Add some basic styling to make the form look nicer */
+        form {
+            width: 50%;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Yamaha AVR PEQ Updater</h1>
+    <form id="update-form">
+        <label for="ip">Yamaha AVR IP:</label>
+        <input type="text" id="ip" name="ip"><br><br>
+        <label for="input">MB filters txt file:</label>
+        <input type="file" id="input" name="input"><br><br>
+        <button id="submit">Submit</button>
+    </form>
+    <div id="output"></div>
+    <script type="module">
+        const dictSpeakers = {
+            "Front Left": "Front_L",
+            "Front Right": "Front_R",
+            "Center": "Center",
+            "LFE": "Subwoofer_1",
+            "Surround Right": "Sur_R",
+            "Surround Left": "Sur_L",
+            "Surround Back Right": "Sur_Back_R",
+            "Surround Back Left": "Sur_Back_L"
+        };
+
+        const dictFreq = {
+            "15.5 Hz": "15.6 Hz",
+            "19.6 Hz": "19.7 Hz",
+            "24.7 Hz": "24.8 Hz",
+            "31.2 Hz": "31.3 Hz",
+            "39.3 Hz": "39.4 Hz",
+            "49.59 Hz": "49.6 Hz",
+            "62.5 Hz": "62.5 Hz",
+            "78.69 Hz": "78.7 Hz",
+            "99.19 Hz": "99.2 Hz",
+            "125 Hz": "125.0 Hz",
+            "157.5 Hz": "157.5 Hz",
+            "198.3 Hz": "198.4 Hz",
+            "250 Hz": "250.0 Hz",
+            "315 Hz": "315.0 Hz",
+            "396.8 Hz": "396.9 Hz",
+            "500 Hz": "500.0 Hz",
+            "630 Hz": "630.0 Hz",
+            "793.7 Hz": "793.7 Hz",
+            "1000 Hz": "1.00 kHz",
+            "1260 Hz": "1.26 kHz",
+            "1590 Hz": "1.59 kHz",
+            "2000 Hz": "2.00 kHz",
+            "2520 Hz": "2.52 kHz",
+            "3170 Hz": "3.17 kHz",
+            "4000 Hz": "4.00 kHz",
+            "5040 Hz": "5.04 kHz",
+            "6350 Hz": "6.35 kHz",
+            "8000 Hz": "8.00 kHz",
+            "10100 Hz": "10.1 kHz",
+            "12700 Hz": "12.7 kHz",
+            "16000 Hz": "16.0 kHz"
+        };
+
+        const dictQ = {
+            "0.5": "0.500",
+            "0.62": "0.630",
+            "0.79": "0.794",
+            "1": "1.000",
+            "1.25": "1.260",
+            "1.58": "1.587",
+            "2": "2.000",
+            "2.51": "2.520",
+            "3.17": "3.175",
+            "4": "4.000",
+            "5.03": "5.040",
+            "6.34": "6.350",
+            "8": "8.000",
+            "10.07": "10.080"
+        }
+
+        function parseSpeakerName(speaker) {
+            /**
+             * Function to parse the Speaker Name (MB) to Yamaha Web format
+             */
+            return dictSpeakers[speaker];
+        }
+
+        function parseFrequencyValue(freq) {
+            /**
+             * Function to parse the Frequency value (MB) to Yamaha Web format
+             */
+            return dictFreq[freq];
+        }
+
+        function parseGainValue(gain) {
+            /**
+             * Function to parse the Gain value (MB) to Yamaha Web format
+             */
+            const value = gain.split()[0].trim();
+            return parseInt(parseFloat(value) * 10);
+        }
+
+        function parseQValue(q) {
+            /**
+             * Function to parse the Q value (MB) to Yamaha Web format
+             */
+            return dictQ[q];
+        }
+
+        function createFilterElement(filterData) {
+            const filterElement = document.createElement(`Band_${filterData.number}`);
+
+            if (filterData.Frequency) {
+                const freq = document.createElement("Freq");
+                freq.textContent = filterData.Frequency;
+                filterElement.appendChild(freq);
+            }
+
+            if (filterData.Gain) {
+                const gain = document.createElement("Gain");
+                const val = document.createElement("Val");
+                val.textContent = filterData.Gain;
+                gain.appendChild(val);
+                filterElement.appendChild(gain);
+            }
+
+            if (filterData["Q factor"]) {
+                const q = document.createElement("Q");
+                q.textContent = filterData["Q factor"];
+                filterElement.appendChild(q);
+            }
+
+            return filterElement;
+        }
+
+        function parseTextToXML(text) {
+            const lines = text.trim().split('\n');
+            const manualData = document.createElement("Manual_Data");
+            let currentSection = null;
+            let prevLine = '';
+
+            lines.forEach(line => {
+                line = line.trim();
+                if (line.endsWith('=')) {
+                    currentSection = document.createElement(parseSpeakerName(prevLine));
+                    manualData.appendChild(currentSection);
+                } else if (line.startsWith('Filter')) {
+                    var filterData = { number: line.split(' ')[1].replace(':', '') };
+                } else if (line.startsWith('-')) {
+                    const [key, value] = line.split(':');
+                    const cleanKey = key.replace('-', '').trim();
+                    if (cleanKey === 'Frequency') {
+                        filterData[cleanKey] = parseFrequencyValue(value.trim());
+                    } else if (cleanKey === 'Q factor') {
+                        filterData[cleanKey] = parseQValue(value.trim());
+                    } else if (cleanKey === 'Gain') {
+                        filterData[cleanKey] = parseGainValue(value.trim());
+                        currentSection.appendChild(createFilterElement(filterData));
+                    }
+                }
+                prevLine = line;
+            });
+
+            return manualData;
+        }
+
+        function createPEQRequestXML() {
+            const text = document.getElementById('input').value;
+            const manualData = parseTextToXML(text);
+
+            const root = document.createElement("YAMAHA_AV");
+            root.setAttribute("cmd", "PUT");
+
+            const system = document.createElement("System");
+            const speakerPreout = document.createElement("Speaker_Preout");
+            const pattern1 = document.createElement("Pattern_1");
+            const peq = document.createElement("PEQ");
+
+            peq.appendChild(manualData);
+            pattern1.appendChild(peq);
+            speakerPreout.appendChild(pattern1);
+            system.appendChild(speakerPreout);
+            root.appendChild(system);
+
+            return root;
+        }
+
+        function displayMessage(message) {
+            const outputDiv = document.getElementById('output');
+            outputDiv.textContent = message;
+        }
+
+        const submitButton = document.getElementById('submit');
+        submitButton.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const ip = document.getElementById('ip').value.trim();
+            const inputFile = document.getElementById('input').files[0];
+
+            if (!ip) {
+                alert('Please enter the Yamaha AVR IP');
+                return;
+            }
+
+            if (!inputFile) {
+                displayMessage('Please select the MB filters txt file');
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onerror = e => {
+                displayMessage('Error reading file:', e.target.error);
+            };
+            reader.onabort = (e) => {
+                displayMessage('File reading was aborted:', e);
+            };
+            reader.onloadend = (e) => {
+                if (e.target.error) {
+                    displayMessage('Error reading file:', e.target.error);
+                }
+            };
+            reader.onload = (e) => {
+                const data = reader.result;
+                const myxml = createPEQRequestXML(data);
+
+                const xml_str = new XMLSerializer().serializeToString(myxml);
+
+                const url = `http://${ip}/YamahaRemoteControl/ctrl`;
+                const headers = { 'Content-Type': 'application/xml' };
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: headers,
+                    body: xml_str
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        if (response.ok) {
+                            const response_xml = new DOMParser().parseFromString(data, 'application/xml');
+                            const rc_value = response_xml.querySelector('RC').textContent;
+
+                            if (rc_value === '0') {
+                                displayMessage(`PEQ values updated successfully!`);
+                            } else {
+                                displayMessage(`Failed to update PEQ values: ${data}`);
+                            }
+                        } else {
+                            displayMessage(`Failed to update PEQ values (HTTP response: ${response.status}) : ${data}`);
+                        }
+                    })
+                    .catch(error => {
+                        displayMessage(`Error: ${error}`);
+                    });
+            };
+            reader.readAsText(inputFile);
+        });
+    </script>
+</body>
+
+</html>
