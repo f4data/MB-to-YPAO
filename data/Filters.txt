@@ -1,0 +1,63 @@
+Set up the channels according to this configuration.
+
+Front Left
+==========
+Filter 1:
+- Frequency: 125 Hz
+- Q factor: 0.50
+- Gain: -6.00 dB
+Filter 2:
+- Frequency: 125 Hz
+- Q factor: 0.50
+- Gain: -6.00 dB
+Filter 3:
+- Frequency: 125 Hz
+- Q factor: 0.50
+- Gain: -3.50 dB
+Filter 4:
+- Frequency: 198 Hz
+- Q factor: 2.52
+- Gain: 2.50 dB
+Filter 5:
+- Frequency: 1000 Hz
+- Q factor: 1.26
+- Gain: 1.50 dB
+Filter 6:
+- Frequency: 3170 Hz
+- Q factor: 3.17
+- Gain: -2.00 dB
+Filter 7:
+- Frequency: 5040 Hz
+- Q factor: 0.50
+- Gain: 3.50 dB
+
+Front Right
+===========
+Filter 1:
+- Frequency: 125 Hz
+- Q factor: 0.50
+- Gain: -6.00 dB
+Filter 2:
+- Frequency: 125 Hz
+- Q factor: 0.50
+- Gain: -6.00 dB
+Filter 3:
+- Frequency: 125 Hz
+- Q factor: 0.50
+- Gain: -3.50 dB
+Filter 4:
+- Frequency: 198 Hz
+- Q factor: 3.17
+- Gain: 3.00 dB
+Filter 5:
+- Frequency: 2000 Hz
+- Q factor: 3.17
+- Gain: -1.00 dB
+Filter 6:
+- Frequency: 2520 Hz
+- Q factor: 1.59
+- Gain: -2.00 dB
+Filter 7:
+- Frequency: 5040 Hz
+- Q factor: 0.50
+- Gain: 3.50 dB
