@@ -13,7 +13,9 @@ dict_speakers = {
     "Surround Right": "Sur_R",
     "Surround Left": "Sur_L",
     "Surround Back Right": "Sur_Back_R",
-    "Surround Back Left": "Sur_Back_L"
+    "Surround Back Left": "Sur_Back_L",
+    "Middle Height Right": "Front_Presence_R",
+    "Middle Height Left": "Front_Presence_L"
 }
 
 # Dictionary to restore the frequency values
