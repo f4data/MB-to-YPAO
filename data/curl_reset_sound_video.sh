@@ -1,0 +1,30 @@
+#!/bin/bash
+curl -X POST "http://192.168.68.68:80/YamahaRemoteControl/ctrl" --data-binary  '<YAMAHA_AV cmd="PUT">
+  <System>
+    <Sound_Video>
+      <Dynamic_Range>MAX</Dynamic_Range>
+    </Sound_Video>
+  </System>
+  <Main_Zone>
+    <Volume>
+      <Subwoofer_Trim>0</Subwoofer_Trim>
+    </Volume>
+    <Sound_Video>
+      <Tone>
+        <Bass>0</Bass>
+        <Treble>0</Treble>
+      </Tone>
+      <Pure_Direct>
+        <Mode>Off</Mode>
+      </Pure_Direct>
+      <Extra_Bass>Off</Extra_Bass>
+      <Adaptive_DRC>Off</Adaptive_DRC>
+      <Dialogue_Adjust>
+        <Dialogue_Lvl>0</Dialogue_Lvl>
+        <Dialogue_Lift>0</Dialogue_Lift>
+        <DTS_Dialogue_Control>0</DTS_Dialogue_Control>
+      </Dialogue_Adjust>
+    </Sound_Video>
+  </Main_Zone>
+</YAMAHA_AV>'
+

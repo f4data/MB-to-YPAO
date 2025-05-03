@@ -71,6 +71,452 @@ dict_q = {
     "10.07": "10.080"
 }
 
+avr_reset_peq_xml = '''<YAMAHA_AV cmd="PUT">
+    <System>
+        <Speaker_Preout>
+            <Pattern_1>
+                <PEQ>
+                    <Manual_Data>
+                        <Front_L>
+                            <Band_1>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_1>
+                            <Band_2>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_2>
+                            <Band_3>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_3>
+                            <Band_4>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_4>
+                            <Band_5>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_5>
+                            <Band_6>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_6>
+                            <Band_7>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_7>
+                        </Front_L>
+                        <Center>
+                            <Band_1>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_1>
+                            <Band_2>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_2>
+                            <Band_3>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_3>
+                            <Band_4>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_4>
+                            <Band_5>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_5>
+                            <Band_6>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_6>
+                            <Band_7>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_7>
+                        </Center>
+                        <Front_R>
+                            <Band_1>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_1>
+                            <Band_2>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_2>
+                            <Band_3>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_3>
+                            <Band_4>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_4>
+                            <Band_5>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_5>
+                            <Band_6>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_6>
+                            <Band_7>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_7>
+                        </Front_R>
+                        <Front_Presence_L>
+                            <Band_1>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_1>
+                            <Band_2>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_2>
+                            <Band_3>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_3>
+                            <Band_4>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_4>
+                            <Band_5>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_5>
+                            <Band_6>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_6>
+                            <Band_7>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_7>
+                        </Front_Presence_L>
+                        <Front_Presence_R>
+                            <Band_1>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_1>
+                            <Band_2>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_2>
+                            <Band_3>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_3>
+                            <Band_4>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_4>
+                            <Band_5>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_5>
+                            <Band_6>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_6>
+                            <Band_7>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_7>
+                        </Front_Presence_R>
+                        <Sur_R>
+                            <Band_1>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_1>
+                            <Band_2>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_2>
+                            <Band_3>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_3>
+                            <Band_4>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_4>
+                            <Band_5>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_5>
+                            <Band_6>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_6>
+                            <Band_7>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_7>
+                        </Sur_R>
+                        <Sur_Back_R>
+                            <Band_1>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_1>
+                            <Band_2>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_2>
+                            <Band_3>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_3>
+                            <Band_4>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_4>
+                            <Band_5>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_5>
+                            <Band_6>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_6>
+                            <Band_7>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_7>
+                        </Sur_Back_R>
+                        <Sur_Back_L>
+                            <Band_1>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_1>
+                            <Band_2>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_2>
+                            <Band_3>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_3>
+                            <Band_4>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_4>
+                            <Band_5>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_5>
+                            <Band_6>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_6>
+                            <Band_7>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_7>
+                        </Sur_Back_L>
+                        <Sur_L>
+                            <Band_1>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_1>
+                            <Band_2>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_2>
+                            <Band_3>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_3>
+                            <Band_4>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_4>
+                            <Band_5>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_5>
+                            <Band_6>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_6>
+                            <Band_7>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_7>
+                        </Sur_L>
+                        <Subwoofer_1>
+                            <Band_1>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_1>
+                            <Band_2>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_2>
+                            <Band_3>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_3>
+                            <Band_4>
+                                <Gain>
+                                    <Val>0</Val>
+                                </Gain>
+                                <Q>1.000</Q>
+                            </Band_4>
+                        </Subwoofer_1>
+                    </Manual_Data>
+                </PEQ>
+            </Pattern_1>
+        </Speaker_Preout>
+    </System>
+</YAMAHA_AV>'''
+
+avr_get_levels_xml = '''<YAMAHA_AV cmd="GET">
+    <System>
+        <Speaker_Preout>
+            <Pattern_1>
+                <Lvl>GetParam</Lvl>
+            </Pattern_1>
+        </Speaker_Preout>
+    </System>
+</YAMAHA_AV>'''
+
+
 def parse_speaker_name(speaker):
     """
     Function to parse the Speaker Name (MB) to Yamaha Web format
@@ -164,7 +610,7 @@ def parse_mb_calibration_into_ypao_xml(lines):
     xml_str = ET.tostring(myxml, encoding='utf-8', method='xml')
 
     return xml_str
-
+    
 def prettify_xml(xml_str):
     # Pretty print the XML
     xml_str_pretty = minidom.parseString(xml_str).toprettyxml(indent="  ")
@@ -199,30 +645,43 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        f = request.files['file']
-        if f:
-            #filename = secure_filename(f.filename)
-            filename = f.filename
-            f.save(filename)
-            try:
-                with open(filename, 'r') as file:
-                    content = file.read()
-            except FileNotFoundError:
-                return 'File not found!'
-            except PermissionError:
-                return 'Permission denied!'
-            except Exception as e:
-                return 'Error reading file: ' + str(e)
-            
-            xml_str = parse_mb_calibration_into_ypao_xml(content)
-            response_txt = "Not applied to AVR"
+        action = request.form.get('action')
+        ip = request.form.get('ip')
+        
+        if action == 'reset':
+            xml_str = avr_reset_peq_xml
+            response_txt = "PEQ Values not reset"
 
-            if True:
-                response = publish_ypao_configuration_to_avr(xml_str, request.form['ip'])
-                response_txt = process_avr_response(response)
+            response = publish_ypao_configuration_to_avr(xml_str, ip)
+            response_txt = process_avr_response(response)
 
             xml_str_pretty = minidom.parseString(xml_str).toprettyxml(indent="  ")
-            return render_template('index.html', response=response_txt, mb_data=content, avr_data=escape(xml_str_pretty))
+            return render_template('index.html', response=response_txt, avr_data=escape(xml_str_pretty))
+        
+        if action == 'submit':
+            f = request.files['file']
+            if f:
+                #filename = secure_filename(f.filename)
+                filename = f.filename
+                f.save(filename)
+                try:
+                    with open(filename, 'r') as file:
+                        content = file.read()
+                except FileNotFoundError:
+                    return 'File not found!'
+                except PermissionError:
+                    return 'Permission denied!'
+                except Exception as e:
+                    return 'Error reading file: ' + str(e)
+                
+                xml_str = parse_mb_calibration_into_ypao_xml(content)
+                response_txt = "Not applied to AVR"
+
+                response = publish_ypao_configuration_to_avr(xml_str, ip)
+                response_txt = process_avr_response(response)
+
+                xml_str_pretty = minidom.parseString(xml_str).toprettyxml(indent="  ")
+                return render_template('index.html', response=response_txt, mb_data=content, avr_data=escape(xml_str_pretty))
     return render_template("index.html")
 
 @app.route("/about")
