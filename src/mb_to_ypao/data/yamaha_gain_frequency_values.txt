@@ -1,0 +1,141 @@
+Valid Q values
+0.500
+0.630
+0.794
+1.000
+1.260
+1.587
+2.000
+2.520
+3.175
+4.000
+5.040
+6.350
+8.000
+10.080
+
+
+Valid Frequency Values
+15.6 Hz
+16.6 Hz
+17.5 Hz
+18.6 Hz
+19.7 Hz
+20.9 Hz
+22.1 Hz
+23.4 Hz
+24.8 Hz
+26.3 Hz
+27.8 Hz
+29.5 Hz
+31.3 Hz
+33.1 Hz
+35.1 Hz
+37.2 Hz
+39.4 Hz
+41.7 Hz
+44.2 Hz
+46.8 Hz
+49.6 Hz
+52.6 Hz
+55.7 Hz
+59.0 Hz
+62.5 Hz
+66.2 Hz
+70.2 Hz
+74.3 Hz
+78.7 Hz
+83.4 Hz
+88.4 Hz
+93.6 Hz
+99.2 Hz
+105.1 Hz
+111.4 Hz
+118.0 Hz
+125.0 Hz
+132.4 Hz
+140.3 Hz
+148.7 Hz
+157.5 Hz
+166.9 Hz
+176.8 Hz
+187.3 Hz
+198.4 Hz
+210.2 Hz
+222.7 Hz
+236.0 Hz
+250.0 Hz
+264.9 Hz
+280.6 Hz
+297.3 Hz
+315.0 Hz
+333.7 Hz
+353.6 Hz
+374.6 Hz
+396.9 Hz
+420.4 Hz
+445.4 Hz
+471.9 Hz
+500.0 Hz
+529.7 Hz
+561.2 Hz
+594.6 Hz
+630.0 Hz
+667.4 Hz
+707.1 Hz
+749.2 Hz
+793.7 Hz
+840.9 Hz
+890.9 Hz
+943.9 Hz
+1.00 kHz
+1.06 kHz
+1.12 kHz
+1.19 kHz
+1.26 kHz
+1.33 kHz
+1.41 kHz
+1.50 kHz
+1.59 kHz
+1.68 kHz
+1.78 kHz
+1.89 kHz
+2.00 kHz
+2.12 kHz
+2.24 kHz
+2.38 kHz
+2.52 kHz
+2.67 kHz
+2.83 kHz
+3.00 kHz
+3.17 kHz
+3.36 kHz
+3.56 kHz
+3.78 kHz
+4.00 kHz
+4.24 kHz
+4.49 kHz
+4.76 kHz
+5.04 kHz
+5.34 kHz
+5.66 kHz
+5.99 kHz
+6.35 kHz
+6.73 kHz
+7.13 kHz
+7.55 kHz
+8.00 kHz
+8.48 kHz
+8.98 kHz
+9.51 kHz
+10.1 kHz
+10.7 kHz
+11.3 kHz
+12.0 kHz
+12.7 kHz
+13.5 kHz
+14.3 kHz
+15.1 kHz
+16.0 kHz
+
+

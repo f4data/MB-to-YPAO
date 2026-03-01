@@ -1,4 +1,10 @@
 __pycache__
 .env
 .venv
-
+*.pyc
+dist/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+uv.lock
