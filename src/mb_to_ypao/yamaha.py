@@ -8,6 +8,15 @@ from xml.dom import minidom
 
 import requests
 
+from mb_to_ypao.constants import (
+    AVR_DATA_COPY_FROM_FLAT_XML,
+    AVR_GET_STATUS_XML,
+    AVR_RESET_PEQ_XML,
+    AVR_RESET_SOUND_VIDEO_XML,
+    AVR_RESET_SURROUND_XML,
+    AVR_SET_PEQ_THROUGH_XML,
+    AVR_SET_SPK_LARGE_XML,
+)
 from mb_to_ypao.parser import parse_filters_text
 
 
@@ -18,6 +27,7 @@ from mb_to_ypao.parser import parse_filters_text
 class AvrResult:
     """Outcome of a command sent to the Yamaha AVR."""
 
+    ok: bool
     message: str
     status_code: int
     raw_body: str = ""
@@ -50,7 +60,6 @@ def serialize_xml(root: ET.Element) -> bytes:
     return result
 
 
-
 def prettify_xml(xml_bytes: bytes | str) -> str:
     """Return an indented, human-readable representation of *xml_bytes*."""
     if isinstance(xml_bytes, str):
@@ -72,11 +81,12 @@ def send_to_avr(xml_payload: bytes | str, avr_ip: str, *, timeout: float = 10.0)
     return requests.post(url, headers=headers, data=xml_payload, timeout=timeout)
 
 
-def process_avr_response(response: requests.Response) -> AvrResult:
+def process_avr_response(response: requests.Response, *, success_msg: str = "OK") -> AvrResult:
     """Inspect the AVR HTTP *response* and return a user-friendly :class:`AvrResult`."""
     if response.status_code != 200:
         return AvrResult(
-            message="Failed to update PEQ values. Could not connect to Yamaha AVR.",
+            ok=False,
+            message="Failed: could not connect to Yamaha AVR.",
             status_code=response.status_code,
             raw_body=response.text,
         )
@@ -85,10 +95,78 @@ def process_avr_response(response: requests.Response) -> AvrResult:
     rc_value = response_xml.get("RC")
 
     if rc_value == "0":
-        return AvrResult(message="PEQ values updated successfully!", status_code=200)
+        return AvrResult(ok=True, message=success_msg, status_code=200)
 
     return AvrResult(
-        message="Failed to update PEQ values. The receiver should be powered on.",
+        ok=False,
+        message="Failed: the receiver should be powered on (RC≠0).",
         status_code=response.status_code,
         raw_body=response.text,
     )
+
+
+# ---------------------------------------------------------------------------
+# High-level AVR operations
+# ---------------------------------------------------------------------------
+def check_avr_status(avr_ip: str) -> AvrResult:
+    """Send a lightweight GET command to verify AVR connectivity."""
+    try:
+        response = send_to_avr(AVR_GET_STATUS_XML, avr_ip, timeout=5.0)
+    except requests.RequestException as exc:
+        return AvrResult(ok=False, message=f"Connection failed: {exc}", status_code=0)
+    return process_avr_response(response, success_msg="AVR is reachable and powered on.")
+
+
+def _run_preparation_steps(avr_ip: str, steps: list[tuple[str, str]]) -> AvrResult:
+    """Execute a sequence of named XML commands against the AVR.
+
+    Returns the first failing :class:`AvrResult`, or a success result if all
+    steps complete without error.
+    """
+    for step_name, xml_payload in steps:
+        try:
+            response = send_to_avr(xml_payload, avr_ip)
+        except requests.RequestException as exc:
+            return AvrResult(ok=False, message=f"{step_name}: connection failed — {exc}", status_code=0)
+
+        result = process_avr_response(response, success_msg="OK")
+        if not result.ok:
+            return AvrResult(
+                ok=False,
+                message=f"{step_name}: {result.message}",
+                status_code=result.status_code,
+                raw_body=result.raw_body,
+            )
+    return AvrResult(ok=True, message="All preparation steps completed successfully.", status_code=200)
+
+
+def prepare_system_peq_through(avr_ip: str) -> AvrResult:
+    """Prepare the AVR for MB calibration using PEQ Through mode.
+
+    Steps: set PEQ Through → set speakers Large → reset PEQ →
+    reset Surround → reset Sound/Video.
+    """
+    steps: list[tuple[str, str]] = [
+        ("Set PEQ Through", AVR_SET_PEQ_THROUGH_XML),
+        ("Set speakers Large", AVR_SET_SPK_LARGE_XML),
+        ("Reset PEQ", AVR_RESET_PEQ_XML),
+        ("Reset Surround", AVR_RESET_SURROUND_XML),
+        ("Reset Sound/Video", AVR_RESET_SOUND_VIDEO_XML),
+    ]
+    return _run_preparation_steps(avr_ip, steps)
+
+
+def prepare_system_from_peq_flat(avr_ip: str) -> AvrResult:
+    """Prepare the AVR for MB calibration by copying from PEQ Flat.
+
+    Steps: Data Copy From Flat → set speakers Large → reset PEQ →
+    reset Surround → reset Sound/Video.
+    """
+    steps: list[tuple[str, str]] = [
+        ("Data Copy From Flat", AVR_DATA_COPY_FROM_FLAT_XML),
+        ("Set speakers Large", AVR_SET_SPK_LARGE_XML),
+        ("Reset PEQ", AVR_RESET_PEQ_XML),
+        ("Reset Surround", AVR_RESET_SURROUND_XML),
+        ("Reset Sound/Video", AVR_RESET_SOUND_VIDEO_XML),
+    ]
+    return _run_preparation_steps(avr_ip, steps)

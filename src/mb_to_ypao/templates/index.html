@@ -1,26 +1,74 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<div class="header">
     <h1>Yamaha AVR PEQ Updater</h1>
-    <form action="{{ url_for('index') }}" method="post" enctype="multipart/form-data">
-        <label for="ip">Yamaha AVR IP:</label>
-        <input type="text" name="ip" placeholder="Enter your Yamaha AVR IP here (e.g. 192.168.1.10:80)"><br><br>
-        <button id="reset" onclick="submitForm('reset')">Reset</button><br><br>
-        <label for="input">MB filters txt file:</label>
-        <input type="file" name="file"><br><br>
-        <button id="submit" onclick="submitForm('submit')">Submit</button>    
-    </form>
-    <div id="status_response">
-        <h3>STATUS</h3>
-        <pre>{{ response|safe }}</pre>
-    </div>    
-    <div id="mb_file">
-        <h3>INPUT</h3>
-        <pre>{{ mb_data|safe }}</pre>
+    <p>Convert Magic Beans filters to Yamaha YPAO format</p>
+</div>
+
+<div class="container">
+
+    <!-- ── Section 1: Yamaha AVR Connection ──────────────────────── -->
+    <section class="card" id="section-connection">
+        <h2 class="card-title">1. Connect to Yamaha AVR</h2>
+        <label for="avr-ip">AVR IP Address</label>
+        <div class="ip-row">
+            <input type="text" id="avr-ip" name="ip" placeholder="e.g. 192.168.1.10">
+            <button class="btn btn-primary" id="btn-check-status" type="button" onclick="checkStatus()">Check
+                Status</button>
+        </div>
+        <div class="status-box" id="status-connection"></div>
+    </section>
+
+    <!-- ── Section 2: Preparation ────────────────────────────────── -->
+    <section class="card" id="section-preparation">
+        <h2 class="card-title">2. Prepare the AVR to run Magic Beans</h2>
+        <div class="prep-row">
+            <button class="btn btn-secondary" id="btn-prepare-through" type="button" onclick="preparePeqThrough()"
+                data-tooltip="1. Set PEQ to Through mode&#10;2. Set all speakers to Large&#10;3. Reset PEQ values&#10;4. Reset Surround settings&#10;5. Reset Sound/Video settings">
+                Prepare from PEQ Through
+            </button>
+            <button class="btn btn-secondary" id="btn-prepare-flat" type="button" onclick="prepareFromPeqFlat()"
+                data-tooltip="1. Copy data from PEQ Flat&#10;2. Set all speakers to Large&#10;3. Reset PEQ values&#10;4. Reset Surround settings&#10;5. Reset Sound/Video settings">
+                Prepare from PEQ Flat
+            </button>
+        </div>
+        <div class="status-box" id="status-preparation"></div>
+    </section>
+
+    <!-- ── Section 3: Run Magic Beans ────────────────────────────── -->
+    <section class="card" id="section-run-mb">
+        <h2 class="card-title" style="margin-bottom: 0.5rem;">3. Run Magic Beans</h2>
+        <p style="color: var(--text-dim); font-size: 0.95rem;">Perform the Calibration of your system with Magic Beans.
+        </p>
+    </section>
+
+    <!-- ── Section 4: Magic Beans Filters ────────────────────────── -->
+    <section class="card" id="section-filters">
+        <h2 class="card-title">4. Apply Magic Beans filters to AVR</h2>
+        <label for="filter-file">MB Filters File</label>
+        <input type="file" id="filter-file" name="file" accept=".txt">
+        <div style="margin-top: .85rem;">
+            <button class="btn btn-primary" id="btn-apply-filters" type="button" onclick="applyFilters()">Apply
+                Filters</button>
+        </div>
+        <div class="status-box" id="status-filters"></div>
+    </section>
+
+    <!-- ── Verbose toggle & data ─────────────────────────────────── -->
+    <div class="verbose-toggle">
+        <input type="checkbox" id="verbose-checkbox">
+        <label for="verbose-checkbox">Verbose</label>
     </div>
-    <div id="avr_file">
-        <h3>OUTPUT</h3>
-        <a>{{ avr_data|safe}}</a>
+
+    <div class="verbose-content" id="verbose-content">
+        <h3>INPUT to AVR</h3>
+        <pre id="verbose-input"></pre>
+        <h3>OUTPUT from AVR</h3>
+        <pre id="verbose-output"></pre>
     </div>
+
+</div>
 
 {% endblock %}

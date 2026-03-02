@@ -61,7 +61,7 @@ body {
 .header h1 {
     font-size: 1.8rem;
     font-weight: 600;
-    color: var(--text);
+    color: var(--accent);
     letter-spacing: -0.02em;
 }
 

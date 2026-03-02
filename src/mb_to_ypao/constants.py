@@ -117,3 +117,73 @@ AVR_GET_LEVELS_XML: str = (
     "<Lvl>GetParam</Lvl>"
     "</Pattern_1></Speaker_Preout></System></YAMAHA_AV>"
 )
+
+# ---------------------------------------------------------------------------
+# Preparation XML payloads (extracted from shell scripts)
+# ---------------------------------------------------------------------------
+
+AVR_GET_STATUS_XML: str = (
+    '<YAMAHA_AV cmd="GET"><System><Config>GetParam</Config></System></YAMAHA_AV>'
+)
+
+AVR_SET_PEQ_THROUGH_XML: str = (
+    '<YAMAHA_AV cmd="PUT"><System><Speaker_Preout><Pattern_1><PEQ>'
+    "<Sel>Through</Sel>"
+    "<Manual_Data><Reset>Execute</Reset></Manual_Data>"
+    "</PEQ></Pattern_1></Speaker_Preout></System>"
+    "<Main_Zone><Sound_Video>"
+    "<YPAO_Volume>Off</YPAO_Volume>"
+    "</Sound_Video></Main_Zone></YAMAHA_AV>"
+)
+
+AVR_DATA_COPY_FROM_FLAT_XML: str = (
+    '<YAMAHA_AV cmd="PUT"><System><Speaker_Preout><Pattern_1><PEQ>'
+    "<Sel>Manual</Sel>"
+    "<Data_Copy_From>Flat</Data_Copy_From>"
+    "</PEQ></Pattern_1></Speaker_Preout></System>"
+    "<Main_Zone><Sound_Video>"
+    "<YPAO_Volume>On</YPAO_Volume>"
+    "</Sound_Video></Main_Zone></YAMAHA_AV>"
+)
+
+AVR_SET_SPK_LARGE_XML: str = (
+    '<YAMAHA_AV cmd="PUT"><System><Speaker_Preout><Pattern_1><Config>'
+    "<Front><Type>Large</Type></Front>"
+    "<Center><Type>Large</Type></Center>"
+    "<Sur><Type>Large</Type></Sur>"
+    "<Sur_Back><Type>Large</Type></Sur_Back>"
+    "<Front_Presence><Type>Large</Type></Front_Presence>"
+    "</Config></Pattern_1></Speaker_Preout></System></YAMAHA_AV>"
+)
+
+AVR_RESET_SURROUND_XML: str = (
+    '<YAMAHA_AV cmd="PUT"><Main_Zone><Surround>'
+    "<Program_Sel><Current>"
+    "<Straight>On</Straight>"
+    "<Enhancer>Off</Enhancer>"
+    "</Current></Program_Sel>"
+    "<Adaptive_DSP_Lvl>Off</Adaptive_DSP_Lvl>"
+    "<VSBS>Off</VSBS>"
+    "</Surround></Main_Zone></YAMAHA_AV>"
+)
+
+AVR_RESET_SOUND_VIDEO_XML: str = (
+    '<YAMAHA_AV cmd="PUT">'
+    "<System><Sound_Video>"
+    "<Dynamic_Range>MAX</Dynamic_Range>"
+    "</Sound_Video></System>"
+    "<Main_Zone>"
+    "<Volume><Subwoofer_Trim>0</Subwoofer_Trim></Volume>"
+    "<Sound_Video>"
+    "<Tone><Bass>0</Bass><Treble>0</Treble></Tone>"
+    "<Pure_Direct><Mode>Off</Mode></Pure_Direct>"
+    "<Extra_Bass>Off</Extra_Bass>"
+    "<Adaptive_DRC>Off</Adaptive_DRC>"
+    "<Dialogue_Adjust>"
+    "<Dialogue_Lvl>0</Dialogue_Lvl>"
+    "<Dialogue_Lift>0</Dialogue_Lift>"
+    "<DTS_Dialogue_Control>0</DTS_Dialogue_Control>"
+    "</Dialogue_Adjust>"
+    "</Sound_Video>"
+    "</Main_Zone></YAMAHA_AV>"
+)
