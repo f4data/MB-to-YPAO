@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from typing import Literal
 
-from mb_to_ypao.constants import PEQ_FREQUENCIES, GEQ_FREQUENCIES, Q_FACTORS, SPEAKERS
+from mb_to_ypao.constants import GEQ_FREQUENCIES, PEQ_FREQUENCIES, Q_FACTORS, SPEAKERS
 
 
 # ---------------------------------------------------------------------------
@@ -94,7 +94,7 @@ def parse_q_factor(raw: str) -> str:
 
 
 def encode_geq_gain(gain_db: float) -> int:
-    """Round *gain_db* to the nearest 0.5 dB and express as a Yamaha integer (×10).
+    """Round *gain_db* to the nearest 0.5 dB and express as a Yamaha integer (x10).
 
     The Yamaha GEQ accepts values in steps of 0.5 dB.  The AVR stores them as
     integers with an implicit ÷10 scaling (``Exp=1``).

@@ -5,8 +5,7 @@ from __future__ import annotations
 import tempfile
 from pathlib import Path
 
-from flask import Flask, jsonify, render_template, request
-from markupsafe import escape
+from flask import Flask, render_template, request
 
 from mb_to_ypao import __version__
 from mb_to_ypao.yamaha import (
@@ -98,7 +97,7 @@ def create_app() -> Flask:
             "ok": result.ok,
             "message": result.message,
             "input": content,
-            "output": escape(pretty_xml),
+            "output": pretty_xml,
         }, 200
 
     return app

@@ -17,7 +17,7 @@ from mb_to_ypao.constants import (
     AVR_SET_PEQ_THROUGH_XML,
     AVR_SET_SPK_LARGE_XML,
 )
-from mb_to_ypao.parser import detect_format, parse_filters_text_peq, parse_filters_text_geq
+from mb_to_ypao.parser import detect_format, parse_filters_text_geq, parse_filters_text_peq
 
 
 # ---------------------------------------------------------------------------
@@ -128,7 +128,7 @@ def check_avr_status(avr_ip: str) -> AvrResult:
         response = send_to_avr(AVR_GET_STATUS_XML, avr_ip, timeout=5.0)
     except requests.RequestException as exc:
         return AvrResult(ok=False, message=f"Connection failed: {exc}", status_code=0)
-    return process_avr_response(response, success_msg="AVR is reachable and powered on.")
+    return process_avr_response(response, success_msg="AVR is reachable.")
 
 
 def _run_preparation_steps(avr_ip: str, steps: list[tuple[str, str]]) -> AvrResult:
