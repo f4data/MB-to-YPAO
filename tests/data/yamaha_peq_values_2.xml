@@ -1,0 +1,400 @@
+<?xml version="1.0" ?>
+<YAMAHA_AV cmd="PUT">
+  <System>
+    <Speaker_Preout>
+      <Pattern_1>
+        <PEQ>
+          <Manual_Data>
+            <Front_L>
+              <Band_1>
+                <Freq>125.0 Hz</Freq>
+                <Gain>
+                  <Val>-50</Val>
+                </Gain>
+                <Q>2.520</Q>
+              </Band_1>
+              <Band_2>
+                <Freq>315.0 Hz</Freq>
+                <Gain>
+                  <Val>-40</Val>
+                </Gain>
+                <Q>3.175</Q>
+              </Band_2>
+              <Band_3>
+                <Freq>630.0 Hz</Freq>
+                <Gain>
+                  <Val>30</Val>
+                </Gain>
+                <Q>1.587</Q>
+              </Band_3>
+              <Band_4>
+                <Freq>630.0 Hz</Freq>
+                <Gain>
+                  <Val>30</Val>
+                </Gain>
+                <Q>1.587</Q>
+              </Band_4>
+              <Band_5>
+                <Freq>2.00 kHz</Freq>
+                <Gain>
+                  <Val>-25</Val>
+                </Gain>
+                <Q>1.587</Q>
+              </Band_5>
+              <Band_6>
+                <Freq>2.00 kHz</Freq>
+                <Gain>
+                  <Val>-20</Val>
+                </Gain>
+                <Q>1.260</Q>
+              </Band_6>
+              <Band_7>
+                <Freq>16.0 kHz</Freq>
+                <Gain>
+                  <Val>-15</Val>
+                </Gain>
+                <Q>2.000</Q>
+              </Band_7>
+            </Front_L>
+            <Center>
+              <Band_1>
+                <Freq>78.7 Hz</Freq>
+                <Gain>
+                  <Val>50</Val>
+                </Gain>
+                <Q>3.175</Q>
+              </Band_1>
+              <Band_2>
+                <Freq>157.5 Hz</Freq>
+                <Gain>
+                  <Val>-35</Val>
+                </Gain>
+                <Q>3.175</Q>
+              </Band_2>
+              <Band_3>
+                <Freq>500.0 Hz</Freq>
+                <Gain>
+                  <Val>50</Val>
+                </Gain>
+                <Q>0.794</Q>
+              </Band_3>
+              <Band_4>
+                <Freq>500.0 Hz</Freq>
+                <Gain>
+                  <Val>50</Val>
+                </Gain>
+                <Q>0.794</Q>
+              </Band_4>
+              <Band_5>
+                <Freq>6.35 kHz</Freq>
+                <Gain>
+                  <Val>-55</Val>
+                </Gain>
+                <Q>1.587</Q>
+              </Band_5>
+              <Band_6>
+                <Freq>8.00 kHz</Freq>
+                <Gain>
+                  <Val>-55</Val>
+                </Gain>
+                <Q>1.260</Q>
+              </Band_6>
+              <Band_7>
+                <Freq>10.1 kHz</Freq>
+                <Gain>
+                  <Val>-15</Val>
+                </Gain>
+                <Q>2.520</Q>
+              </Band_7>
+            </Center>
+            <Front_R>
+              <Band_1>
+                <Freq>198.4 Hz</Freq>
+                <Gain>
+                  <Val>-60</Val>
+                </Gain>
+                <Q>2.000</Q>
+              </Band_1>
+              <Band_2>
+                <Freq>315.0 Hz</Freq>
+                <Gain>
+                  <Val>-25</Val>
+                </Gain>
+                <Q>3.175</Q>
+              </Band_2>
+              <Band_3>
+                <Freq>500.0 Hz</Freq>
+                <Gain>
+                  <Val>25</Val>
+                </Gain>
+                <Q>3.175</Q>
+              </Band_3>
+              <Band_4>
+                <Freq>630.0 Hz</Freq>
+                <Gain>
+                  <Val>25</Val>
+                </Gain>
+                <Q>3.175</Q>
+              </Band_4>
+              <Band_5>
+                <Freq>10.1 kHz</Freq>
+                <Gain>
+                  <Val>10</Val>
+                </Gain>
+                <Q>2.520</Q>
+              </Band_5>
+              <Band_6>
+                <Freq>10.1 kHz</Freq>
+                <Gain>
+                  <Val>10</Val>
+                </Gain>
+                <Q>2.520</Q>
+              </Band_6>
+              <Band_7>
+                <Freq>16.0 kHz</Freq>
+                <Gain>
+                  <Val>-10</Val>
+                </Gain>
+                <Q>2.000</Q>
+              </Band_7>
+            </Front_R>
+            <Sur_R>
+              <Band_1>
+                <Freq>125.0 Hz</Freq>
+                <Gain>
+                  <Val>20</Val>
+                </Gain>
+                <Q>6.350</Q>
+              </Band_1>
+              <Band_2>
+                <Freq>198.4 Hz</Freq>
+                <Gain>
+                  <Val>-90</Val>
+                </Gain>
+                <Q>1.000</Q>
+              </Band_2>
+              <Band_3>
+                <Freq>396.9 Hz</Freq>
+                <Gain>
+                  <Val>30</Val>
+                </Gain>
+                <Q>2.520</Q>
+              </Band_3>
+              <Band_4>
+                <Freq>630.0 Hz</Freq>
+                <Gain>
+                  <Val>-15</Val>
+                </Gain>
+                <Q>3.175</Q>
+              </Band_4>
+              <Band_5>
+                <Freq>2.00 kHz</Freq>
+                <Gain>
+                  <Val>-15</Val>
+                </Gain>
+                <Q>2.000</Q>
+              </Band_5>
+              <Band_6>
+                <Freq>10.1 kHz</Freq>
+                <Gain>
+                  <Val>25</Val>
+                </Gain>
+                <Q>1.000</Q>
+              </Band_6>
+              <Band_7>
+                <Freq>10.1 kHz</Freq>
+                <Gain>
+                  <Val>25</Val>
+                </Gain>
+                <Q>1.000</Q>
+              </Band_7>
+            </Sur_R>
+            <Sur_Back_R>
+              <Band_1>
+                <Freq>99.2 Hz</Freq>
+                <Gain>
+                  <Val>25</Val>
+                </Gain>
+                <Q>5.040</Q>
+              </Band_1>
+              <Band_2>
+                <Freq>198.4 Hz</Freq>
+                <Gain>
+                  <Val>-90</Val>
+                </Gain>
+                <Q>1.587</Q>
+              </Band_2>
+              <Band_3>
+                <Freq>500.0 Hz</Freq>
+                <Gain>
+                  <Val>-10</Val>
+                </Gain>
+                <Q>10.080</Q>
+              </Band_3>
+              <Band_4>
+                <Freq>2.00 kHz</Freq>
+                <Gain>
+                  <Val>-15</Val>
+                </Gain>
+                <Q>2.520</Q>
+              </Band_4>
+              <Band_5>
+                <Freq>2.00 kHz</Freq>
+                <Gain>
+                  <Val>-15</Val>
+                </Gain>
+                <Q>2.520</Q>
+              </Band_5>
+              <Band_6>
+                <Freq>10.1 kHz</Freq>
+                <Gain>
+                  <Val>20</Val>
+                </Gain>
+                <Q>2.000</Q>
+              </Band_6>
+              <Band_7>
+                <Freq>10.1 kHz</Freq>
+                <Gain>
+                  <Val>20</Val>
+                </Gain>
+                <Q>2.000</Q>
+              </Band_7>
+            </Sur_Back_R>
+            <Sur_Back_L>
+              <Band_1>
+                <Freq>99.2 Hz</Freq>
+                <Gain>
+                  <Val>30</Val>
+                </Gain>
+                <Q>6.350</Q>
+              </Band_1>
+              <Band_2>
+                <Freq>198.4 Hz</Freq>
+                <Gain>
+                  <Val>-115</Val>
+                </Gain>
+                <Q>1.587</Q>
+              </Band_2>
+              <Band_3>
+                <Freq>2.00 kHz</Freq>
+                <Gain>
+                  <Val>-25</Val>
+                </Gain>
+                <Q>2.520</Q>
+              </Band_3>
+              <Band_4>
+                <Freq>2.00 kHz</Freq>
+                <Gain>
+                  <Val>-25</Val>
+                </Gain>
+                <Q>2.000</Q>
+              </Band_4>
+              <Band_5>
+                <Freq>3.17 kHz</Freq>
+                <Gain>
+                  <Val>15</Val>
+                </Gain>
+                <Q>3.175</Q>
+              </Band_5>
+              <Band_6>
+                <Freq>10.1 kHz</Freq>
+                <Gain>
+                  <Val>25</Val>
+                </Gain>
+                <Q>1.260</Q>
+              </Band_6>
+              <Band_7>
+                <Freq>10.1 kHz</Freq>
+                <Gain>
+                  <Val>25</Val>
+                </Gain>
+                <Q>1.260</Q>
+              </Band_7>
+            </Sur_Back_L>
+            <Sur_L>
+              <Band_1>
+                <Freq>250.0 Hz</Freq>
+                <Gain>
+                  <Val>-75</Val>
+                </Gain>
+                <Q>0.500</Q>
+              </Band_1>
+              <Band_2>
+                <Freq>396.9 Hz</Freq>
+                <Gain>
+                  <Val>60</Val>
+                </Gain>
+                <Q>2.000</Q>
+              </Band_2>
+              <Band_3>
+                <Freq>630.0 Hz</Freq>
+                <Gain>
+                  <Val>-20</Val>
+                </Gain>
+                <Q>0.500</Q>
+              </Band_3>
+              <Band_4>
+                <Freq>3.17 kHz</Freq>
+                <Gain>
+                  <Val>20</Val>
+                </Gain>
+                <Q>2.000</Q>
+              </Band_4>
+              <Band_5>
+                <Freq>3.17 kHz</Freq>
+                <Gain>
+                  <Val>20</Val>
+                </Gain>
+                <Q>2.520</Q>
+              </Band_5>
+              <Band_6>
+                <Freq>10.1 kHz</Freq>
+                <Gain>
+                  <Val>30</Val>
+                </Gain>
+                <Q>1.000</Q>
+              </Band_6>
+              <Band_7>
+                <Freq>10.1 kHz</Freq>
+                <Gain>
+                  <Val>30</Val>
+                </Gain>
+                <Q>1.260</Q>
+              </Band_7>
+            </Sur_L>
+            <Subwoofer_1>
+              <Band_1>
+                <Freq>49.6 Hz</Freq>
+                <Gain>
+                  <Val>-65</Val>
+                </Gain>
+                <Q>1.260</Q>
+              </Band_1>
+              <Band_2>
+                <Freq>62.5 Hz</Freq>
+                <Gain>
+                  <Val>-10</Val>
+                </Gain>
+                <Q>5.040</Q>
+              </Band_2>
+              <Band_3>
+                <Freq>125.0 Hz</Freq>
+                <Gain>
+                  <Val>50</Val>
+                </Gain>
+                <Q>0.500</Q>
+              </Band_3>
+              <Band_4>
+                <Freq>125.0 Hz</Freq>
+                <Gain>
+                  <Val>10</Val>
+                </Gain>
+                <Q>2.000</Q>
+              </Band_4>
+            </Subwoofer_1>
+          </Manual_Data>
+        </PEQ>
+      </Pattern_1>
+    </Speaker_Preout>
+  </System>
+</YAMAHA_AV>

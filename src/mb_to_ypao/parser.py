@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
+from typing import Literal
 
-from mb_to_ypao.constants import FREQUENCIES, Q_FACTORS, SPEAKERS
+from mb_to_ypao.constants import PEQ_FREQUENCIES, GEQ_FREQUENCIES, Q_FACTORS, SPEAKERS
 
 
 # ---------------------------------------------------------------------------
@@ -19,6 +20,36 @@ class FilterData:
     frequency: str
     gain: int
     q_factor: str
+
+
+# ---------------------------------------------------------------------------
+# Format detection
+# ---------------------------------------------------------------------------
+def detect_format(text: str) -> Literal["peq", "geq"]:
+    """Detect whether *text* uses the ``peq`` (PEQ) or ``geq`` (GEQ) format.
+
+    Detection inspects the first non-empty content line after the first
+    ``===`` section separator:
+
+    - If that line starts with ``Filter`` → ``peq``
+    - If that line contains ``Hz:`` → ``geq``
+
+    Raises:
+        ValueError: If the format cannot be determined.
+    """
+    found_header = False
+    for line in text.strip().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("=") and stripped.replace("=", "") == "":
+            found_header = True
+            continue
+        if found_header and stripped:
+            if stripped.startswith("Filter"):
+                return "peq"
+            if "Hz:" in stripped:
+                return "geq"
+    msg = "Cannot detect calibration format from file content."
+    raise ValueError(msg)
 
 
 # ---------------------------------------------------------------------------
@@ -39,7 +70,7 @@ def parse_frequency(raw: str) -> str:
     Raises:
         KeyError: If *raw* is not a recognised frequency value.
     """
-    return FREQUENCIES[raw]
+    return PEQ_FREQUENCIES[raw]
 
 
 def parse_gain(raw: str) -> int:
@@ -62,8 +93,26 @@ def parse_q_factor(raw: str) -> str:
     return Q_FACTORS[raw]
 
 
+def encode_geq_gain(gain_db: float) -> int:
+    """Round *gain_db* to the nearest 0.5 dB and express as a Yamaha integer (×10).
+
+    The Yamaha GEQ accepts values in steps of 0.5 dB.  The AVR stores them as
+    integers with an implicit ÷10 scaling (``Exp=1``).
+
+    Examples:
+        >>> encode_geq_gain(-3.87)  # rounds to -4.0 dB
+        -40
+        >>> encode_geq_gain(-3.73)  # rounds to -3.5 dB
+        -35
+        >>> encode_geq_gain(0.0)
+        0
+    """
+    # round to nearest 0.5: multiply by 2, round to int, multiply by 5
+    return int(round(gain_db * 2) * 5)
+
+
 # ---------------------------------------------------------------------------
-# Text → XML
+# Text → XML (peq / PEQ format)
 # ---------------------------------------------------------------------------
 def _build_filter_element(filt: FilterData) -> ET.Element:
     """Create an ``<Band_N>`` XML element from a :class:`FilterData` object."""
@@ -82,8 +131,8 @@ def _build_filter_element(filt: FilterData) -> ET.Element:
     return band
 
 
-def parse_filters_text(text: str) -> ET.Element:
-    """Parse the full MB calibration text and return a ``<Manual_Data>`` XML element.
+def parse_filters_text_peq(text: str) -> ET.Element:
+    """Parse the full MB calibration text (peq / PEQ format) and return a ``<Manual_Data>`` XML element.
 
     The input text is a multi-speaker calibration dump where each speaker
     section is introduced by a name line followed by an ``===`` underline.
@@ -135,3 +184,76 @@ def parse_filters_text(text: str) -> ET.Element:
         prev_line = stripped
 
     return manual_data
+
+
+# ---------------------------------------------------------------------------
+# Text → XML (geq / GEQ format)
+# ---------------------------------------------------------------------------
+def _build_geq_gain_element(tag: str, val: int) -> ET.Element:
+    """Create a ``<Gain_XYZ_Hz>`` XML element with Val, Exp, and Unit children."""
+    gain_el = ET.Element(tag)
+    val_el = ET.SubElement(gain_el, "Val")
+    val_el.text = str(val)
+    exp_el = ET.SubElement(gain_el, "Exp")
+    exp_el.text = "1"
+    unit_el = ET.SubElement(gain_el, "Unit")
+    unit_el.text = "dB"
+    return gain_el
+
+
+def parse_filters_text_geq(text: str) -> ET.Element:
+    """Parse MB calibration text in geq / GEQ format and return a ``<GEQ>`` XML element.
+
+    The input text lists 7 fixed frequency bands per speaker (63 Hz … 16 kHz)
+    as ``<freq>:\\t<gain> dB`` lines.  The LFE channel only has two bands
+    (63 Hz and 160 Hz).
+
+    Gain values are rounded to the nearest 0.5 dB and stored as integers
+    multiplied by 10 (``Exp=1``).
+    """
+    lines = text.strip().split("\n")
+    geq = ET.Element("GEQ")
+    current_section: ET.Element | None = None
+    prev_line = ""
+
+    for line in lines:
+        stripped = line.strip()
+
+        if stripped.startswith("=") and stripped.replace("=", "") == "":
+            # The previous (non-blank) line is the speaker name.
+            speaker_tag = parse_speaker_name(prev_line.strip())
+            current_section = ET.SubElement(geq, speaker_tag)
+
+        elif "Hz:" in stripped and current_section is not None:
+            # e.g. "63 Hz:\t-3.87 dB"
+            freq_part, _, gain_part = stripped.partition(":")
+            freq_key = freq_part.strip()  # e.g. "63 Hz"
+            gain_str = gain_part.strip().split()[0]  # e.g. "-3.87"
+            gain_db = float(gain_str)
+
+            tag = GEQ_FREQUENCIES[freq_key]
+            val = encode_geq_gain(gain_db)
+            current_section.append(_build_geq_gain_element(tag, val))
+
+        prev_line = stripped
+
+    return geq
+
+
+# ---------------------------------------------------------------------------
+# Public dispatcher — auto-detects format
+# ---------------------------------------------------------------------------
+def parse_filters_text(text: str) -> ET.Element:
+    """Parse MB calibration text, auto-detecting the receiver format.
+
+    Delegates to :func:`parse_filters_text_peq` or
+    :func:`parse_filters_text_geq` based on :func:`detect_format`.
+
+    Returns:
+        - ``<Manual_Data>`` element for the ``peq`` format.
+        - ``<GEQ>`` element for the ``geq`` format.
+    """
+    fmt = detect_format(text)
+    if fmt == "geq":
+        return parse_filters_text_geq(text)
+    return parse_filters_text_peq(text)

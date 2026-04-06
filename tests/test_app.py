@@ -12,8 +12,9 @@ from flask.testing import FlaskClient
 from mb_to_ypao.app import create_app
 from mb_to_ypao.yamaha import AvrResult
 
-# Path to the sample filter file shipped with the package.
-SAMPLE_FILTER_FILE = Path(__file__).resolve().parent.parent / "src" / "mb_to_ypao" / "data" / "MB_custom_7.1_2_Filters_Global.txt"
+# Path to the sample filter file in the tests/data directory.
+TEST_DATA_DIR = Path(__file__).resolve().parent / "data"
+SAMPLE_FILTER_FILE = TEST_DATA_DIR / "mb_peq_filters_1.txt"
 
 
 @pytest.fixture()
@@ -122,7 +123,7 @@ class TestApplyFilters:
         content = SAMPLE_FILTER_FILE.read_bytes()
         data = {
             "ip": "192.168.1.1",
-            "file": (BytesIO(content), "MB_custom_7.1_2_Filters_Global.txt"),
+            "file": (BytesIO(content), "mb_peq_filters_1.txt"),
         }
         resp = client.post("/api/apply-filters", data=data, content_type="multipart/form-data")
         assert resp.status_code == 200

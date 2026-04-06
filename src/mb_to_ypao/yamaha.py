@@ -17,7 +17,7 @@ from mb_to_ypao.constants import (
     AVR_SET_PEQ_THROUGH_XML,
     AVR_SET_SPK_LARGE_XML,
 )
-from mb_to_ypao.parser import parse_filters_text
+from mb_to_ypao.parser import detect_format, parse_filters_text_peq, parse_filters_text_geq
 
 
 # ---------------------------------------------------------------------------
@@ -39,16 +39,30 @@ class AvrResult:
 def build_peq_xml(calibration_text: str) -> ET.Element:
     """Build a full ``YAMAHA_AV PUT`` XML tree from raw MB calibration text.
 
+    Auto-detects the calibration format:
+
+    - ``peq``: parametric EQ (PEQ) format — wraps result in
+      ``<PEQ><Manual_Data>``
+    - ``geq``: graphic EQ (GEQ) format — wraps result in
+      ``<Equalizer><GEQ>``
+
     Returns the root :class:`~xml.etree.ElementTree.Element`.
     """
-    manual_data = parse_filters_text(calibration_text)
+    fmt = detect_format(calibration_text)
 
     root = ET.Element("YAMAHA_AV", cmd="PUT")
     system = ET.SubElement(root, "System")
     speaker_preout = ET.SubElement(system, "Speaker_Preout")
     pattern = ET.SubElement(speaker_preout, "Pattern_1")
-    peq = ET.SubElement(pattern, "PEQ")
-    peq.append(manual_data)
+
+    if fmt == "geq":
+        geq = parse_filters_text_geq(calibration_text)
+        equalizer = ET.SubElement(pattern, "Equalizer")
+        equalizer.append(geq)
+    else:  # peq
+        manual_data = parse_filters_text_peq(calibration_text)
+        peq = ET.SubElement(pattern, "PEQ")
+        peq.append(manual_data)
 
     return root
 

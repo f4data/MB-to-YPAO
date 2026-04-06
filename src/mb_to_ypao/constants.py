@@ -17,9 +17,22 @@ SPEAKERS: dict[str, str] = {
 }
 
 # ---------------------------------------------------------------------------
+# GEQ frequency label mapping: geq text label  →  Yamaha XML tag name
+# ---------------------------------------------------------------------------
+GEQ_FREQUENCIES: dict[str, str] = {
+    "63 Hz": "Gain_63_Hz",
+    "160 Hz": "Gain_160_Hz",
+    "400 Hz": "Gain_400_Hz",
+    "1000 Hz": "Gain_1_kHz",
+    "2500 Hz": "Gain_2_5_kHz",
+    "6300 Hz": "Gain_6_3_kHz",
+    "16000 Hz": "Gain_16_kHz",
+}
+
+# ---------------------------------------------------------------------------
 # Frequency value mapping: MultEQ-X display value  →  Yamaha YPAO value
 # ---------------------------------------------------------------------------
-FREQUENCIES: dict[str, str] = {
+PEQ_FREQUENCIES: dict[str, str] = {
     "15.5 Hz": "15.6 Hz",
     "19.6 Hz": "19.7 Hz",
     "24.7 Hz": "24.8 Hz",
@@ -82,7 +95,7 @@ Q_FACTORS: dict[str, str] = {
 # Static XML payloads sent to the Yamaha AVR
 # ---------------------------------------------------------------------------
 
-_BAND_RESET_7 = """
+_PEQ_BAND_RESET_7 = """
             <Band_1><Gain><Val>0</Val></Gain><Q>1.000</Q></Band_1>
             <Band_2><Gain><Val>0</Val></Gain><Q>1.000</Q></Band_2>
             <Band_3><Gain><Val>0</Val></Gain><Q>1.000</Q></Band_3>
@@ -91,7 +104,7 @@ _BAND_RESET_7 = """
             <Band_6><Gain><Val>0</Val></Gain><Q>1.000</Q></Band_6>
             <Band_7><Gain><Val>0</Val></Gain><Q>1.000</Q></Band_7>"""
 
-_BAND_RESET_4 = """
+_PEQ_BAND_RESET_4 = """
             <Band_1><Gain><Val>0</Val></Gain><Q>1.000</Q></Band_1>
             <Band_2><Gain><Val>0</Val></Gain><Q>1.000</Q></Band_2>
             <Band_3><Gain><Val>0</Val></Gain><Q>1.000</Q></Band_3>
@@ -99,16 +112,16 @@ _BAND_RESET_4 = """
 
 AVR_RESET_PEQ_XML: str = (
     '<YAMAHA_AV cmd="PUT"><System><Speaker_Preout><Pattern_1><PEQ><Manual_Data>'
-    f"<Front_L>{_BAND_RESET_7}</Front_L>"
-    f"<Center>{_BAND_RESET_7}</Center>"
-    f"<Front_R>{_BAND_RESET_7}</Front_R>"
-    f"<Front_Presence_L>{_BAND_RESET_7}</Front_Presence_L>"
-    f"<Front_Presence_R>{_BAND_RESET_7}</Front_Presence_R>"
-    f"<Sur_R>{_BAND_RESET_7}</Sur_R>"
-    f"<Sur_Back_R>{_BAND_RESET_7}</Sur_Back_R>"
-    f"<Sur_Back_L>{_BAND_RESET_7}</Sur_Back_L>"
-    f"<Sur_L>{_BAND_RESET_7}</Sur_L>"
-    f"<Subwoofer_1>{_BAND_RESET_4}</Subwoofer_1>"
+    f"<Front_L>{_PEQ_BAND_RESET_7}</Front_L>"
+    f"<Center>{_PEQ_BAND_RESET_7}</Center>"
+    f"<Front_R>{_PEQ_BAND_RESET_7}</Front_R>"
+    f"<Front_Presence_L>{_PEQ_BAND_RESET_7}</Front_Presence_L>"
+    f"<Front_Presence_R>{_PEQ_BAND_RESET_7}</Front_Presence_R>"
+    f"<Sur_R>{_PEQ_BAND_RESET_7}</Sur_R>"
+    f"<Sur_Back_R>{_PEQ_BAND_RESET_7}</Sur_Back_R>"
+    f"<Sur_Back_L>{_PEQ_BAND_RESET_7}</Sur_Back_L>"
+    f"<Sur_L>{_PEQ_BAND_RESET_7}</Sur_L>"
+    f"<Subwoofer_1>{_PEQ_BAND_RESET_4}</Subwoofer_1>"
     "</Manual_Data></PEQ></Pattern_1></Speaker_Preout></System></YAMAHA_AV>"
 )
 
